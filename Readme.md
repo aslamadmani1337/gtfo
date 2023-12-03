@@ -58,6 +58,17 @@ Thanks to [norbemi](https://twitter.com/norbemi) and [cyrus_and](https://twitter
 
 Also thanks to all the creators of [LOLBAS](https://lolbas-project.github.io/#)
 
+## aslam's added option (--file)
+on the target box run the find command and collect the basename. Save this output to a file on the local machine
+```
+find / -perm -u=s -type f 2>/dev/null -exec basename {} \; | sort
+```
+
+Next, on your local machine run `gtfobin -f suidfiles.txt`
+```
+./gtfobin -f suidfiles.txt
+```
+
 ## Support
 
 If you'd like you can buy me some coffee:
