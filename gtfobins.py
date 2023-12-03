@@ -68,6 +68,21 @@ def parse(data: dict):
             print("Type:\t" + colors(sec, 91))
             print("\n")
 
+def gtfofile(bin_name):
+    bins = get_bins()
+    with open(bin_name) as f:
+        #print(f.readlines())
+        for bin in f.readlines():
+            bin=bin.strip("\n")
+            if bin in bins:
+                print(colors("\033[4m###############[ {} ]###############\033[0m".format(bin), 4+91))
+                r = requests.get(RAW_URL.format(bin)).text
+                data = list(yaml.load_all(r, Loader=yaml.SafeLoader))[0]
+
+                parse(data)
+            else:
+                continue
+                #print(colors("[!] binary: `{}` not found on GTFObins: ".format(bin), 91))
 
 def gtfobins(bin_name: str):
     """Search binaries from GTFOBins within command line
@@ -76,7 +91,6 @@ def gtfobins(bin_name: str):
         bin_name {[type]} -- Name of the binary to get info about
 
     """
-
     bins = get_bins()
 
     if bin_name in bins:
